@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "kOjzizkef7HOokyMrUDScadphgafIRgXEaX8t3syOgcPWDiJ5spITgZcCDdQv3IZF1JxRO/ItnMpmsu0Q6miAw==",
+  "dgSpecHash": "F8vqsUknvLOnLYVZULlZv76Zwdi6Qdwx3kYWsW91ggkWJD1AolobHvDasT783+STKGnbtwHKVbr8pIBhAQsUQQ==",
   "success": true,
   "projectFilePath": "C:\\Projetos em andamento\\ASP.Net\\MinimalApi\\MinimalWebApi\\MinimalWebApi\\MinimalWebApi.csproj",
   "expectedPackageFiles": [
@@ -35,6 +35,7 @@
     "C:\\Users\\Usuário\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
     "C:\\Users\\Usuário\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\Usuário\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
+    "C:\\Users\\Usuário\\.nuget\\packages\\minivalidation\\0.4.2-pre.20220306.48\\minivalidation.0.4.2-pre.20220306.48.nupkg.sha512",
     "C:\\Users\\Usuário\\.nuget\\packages\\swashbuckle.aspnetcore\\6.2.3\\swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
     "C:\\Users\\Usuário\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.2.3\\swashbuckle.aspnetcore.swagger.6.2.3.nupkg.sha512",
     "C:\\Users\\Usuário\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.2.3\\swashbuckle.aspnetcore.swaggergen.6.2.3.nupkg.sha512",

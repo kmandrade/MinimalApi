@@ -11,7 +11,7 @@ using MinimalWebApi;
 namespace MinimalWebApi.Migrations
 {
     [DbContext(typeof(MinimalContext))]
-    [Migration("20220416232817_inicial")]
+    [Migration("20220420005813_inicial")]
     partial class inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

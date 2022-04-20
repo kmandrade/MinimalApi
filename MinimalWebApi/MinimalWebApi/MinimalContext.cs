@@ -21,7 +21,7 @@ namespace MinimalWebApi
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
-            modelBuilder.Entity<Fornecedor>().HasKey(p => p.Id);
+            
 
             modelBuilder.Entity<Fornecedor>()
                 .Property(p => p.Nome)
