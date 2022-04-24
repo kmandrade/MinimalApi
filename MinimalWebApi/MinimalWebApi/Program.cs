@@ -1,6 +1,8 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using Microsoft.OpenApi.Models;
 using MinimalWebApi;
 using MinimalWebApi.Models;
 using MiniValidation;
@@ -11,7 +13,47 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+
+
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "Minimal API Sample",
+        Description = "Developed by Eduardo Pires - Owner @ desenvolvedor.io",
+        Contact = new OpenApiContact { Name = "Eduardo Pires", Email = "contato@eduardopires.net.br" },
+        License = new OpenApiLicense { Name = "MIT", Url = new Uri("https://opensource.org/licenses/MIT") }
+    });
+
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Description = "Insira o token JWT desta maneira: Bearer {seu token}",
+        Name = "Authorization",
+        Scheme = "Bearer",
+        BearerFormat = "JWT",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.ApiKey
+    });
+
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+        {
+            {
+                new OpenApiSecurityScheme
+                {
+                    Reference = new OpenApiReference
+                    {
+                        Type = ReferenceType.SecurityScheme,
+                        Id = "Bearer"
+                    }
+                },
+                new string[] {}
+            }
+        });
+
+});
+
+
+
 builder.Services.AddDbContext<MinimalContext>(opt => 
 opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
@@ -35,7 +77,7 @@ app.UseAuthConfiguration();
 app.UseHttpsRedirection();
 
 //O model precisa ser passado por ultimo
-app.MapPost("/registroUsuario", async (
+app.MapPost("/registroUsuario",[AllowAnonymous] async (
         SignInManager<IdentityUser> signInManager,
         UserManager<IdentityUser> userManager,
         IOptions<AppJwtSettings> appJwtSettings,
@@ -79,7 +121,7 @@ app.MapPost("/registroUsuario", async (
       .WithTags("Usuario");
 
 
-app.MapPost("/login", async (
+app.MapPost("/login", [AllowAnonymous] async (
         SignInManager<IdentityUser> signInManager,
         UserManager<IdentityUser> userManager,
         IOptions<AppJwtSettings> appJwtSettings,
@@ -118,7 +160,7 @@ app.MapPost("/login", async (
 
 
 
-app.MapGet("/fornecedor", async
+app.MapGet("/fornecedor", [AllowAnonymous] async
     (MinimalContext context) =>
     await context.Fornecedores.ToListAsync())
     .WithName("BuscaFornecedores")
@@ -138,7 +180,7 @@ app.MapGet("/fornecedor/{id}", async (
     .WithName("BuscaFornecedoresPorId")
     .WithTags("Fornecedor");
 
-app.MapPost("/fornecedor", async (
+app.MapPost("/fornecedor",[Authorize] async (
     MinimalContext context,
     Fornecedor fornecedor) =>
 {
@@ -161,7 +203,7 @@ app.MapPost("/fornecedor", async (
     .WithName("CriaFornecedor")
     .WithTags("Fornecedor"); 
 
-app.MapPut("/fornecedor/{id}", async (
+app.MapPut("/fornecedor/{id}", [Authorize] async (
     int id,
     MinimalContext context,
     Fornecedor fornecedor) =>
@@ -187,7 +229,7 @@ app.MapPut("/fornecedor/{id}", async (
     .WithTags("Fornecedor");
 
 
-app.MapDelete("/fornecedor/{id}", async (
+app.MapDelete("/fornecedor/{id}", [Authorize] async (
     int id,
     MinimalContext context) =>
 {
